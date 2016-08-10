@@ -753,7 +753,7 @@ static NSString *const iRateMacAppStoreURLFormat = @"macappstore://itunes.apple.
                         }
 
                         //check version
-                        if (self.onlyPromptIfLatestVersion && !self.previewMode)
+                        if (!self.previewMode)
                         {
                             NSString *latestVersion = [self valueForKey:@"version" inJSON:json];
                             if ([latestVersion compare:self.applicationVersion options:NSNumericSearch] == NSOrderedDescending)
@@ -763,7 +763,12 @@ static NSString *const iRateMacAppStoreURLFormat = @"macappstore://itunes.apple.
                                     NSLog(@"iRate found that the installed application version (%@) is not the latest version on the App Store, which is %@", self.applicationVersion, latestVersion);
                                 }
 
-                                error = [NSError errorWithDomain:iRateErrorDomain code:iRateErrorApplicationIsNotLatestVersion userInfo:@{NSLocalizedDescriptionKey: @"Installed app is not the latest version available"}];
+                                if ([self.delegate respondsToSelector:@selector(iRateShouldPromptForAppUpdate)])
+                                    [self.delegate iRateShouldPromptForAppUpdate];
+
+                                if (self.onlyPromptIfLatestVersion){
+                                    error = [NSError errorWithDomain:iRateErrorDomain code:iRateErrorApplicationIsNotLatestVersion userInfo:@{NSLocalizedDescriptionKey: @"Installed app is not the latest version available"}];
+                                }
                             }
                         }
                     }
