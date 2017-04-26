@@ -7,7 +7,7 @@ iRate is a library to help you promote your iPhone and Mac App Store apps by pro
 Supported OS & SDK Versions
 -----------------------------
 
-* Supported build target - iOS 9.3 / Mac OS 10.11 (Xcode 7.3, Apple LLVM compiler 7.1)
+* Supported build target - iOS 10.1 / Mac OS 10.11 (Xcode 8.1, Apple LLVM compiler 8.0)
 * Earliest supported deployment target - iOS 7.0 / Mac OS 10.9
 * Earliest compatible deployment target - iOS 4.3 / Mac OS 10.6
 
@@ -148,7 +148,7 @@ If set to YES, iRate will always display the rating prompt on launch, regardless
 
     @property (nonatomic, assign) BOOL useUIAlertControllerIfAvailable;
 
-By default, iRate will use UIAlertView on iOS to display the rating prompt. UIAlertView was deprecated in iOS8 and replaced by UIAlertController. Unfortunately, unlike UIAlertView, presenting an alert with UIAlertController interferes with the ability of the app to display other controllers, and since iRate could theoretically display an alert at any point during the app's lifetime, it might clash with the app attempting to present another view controller. For this reason, use of UIAlertController is disabled by default. Uou should only set thus property to YES if you are certain that it won't clash with your app logic (e.g, if you have disabled automatic rating prompts, or if your app doesn't use any modal view controllers).
+By default, iRate will use UIAlertView on iOS to display the rating prompt. UIAlertView was deprecated in iOS8 and replaced by UIAlertController. Unfortunately, unlike UIAlertView, presenting an alert with UIAlertController interferes with the ability of the app to display other controllers, and since iRate could theoretically display an alert at any point during the app's lifetime, it might clash with the app attempting to present another view controller. For this reason, use of UIAlertController is disabled by default. You should only set this property to YES if you are certain that it won't clash with your app logic (e.g, if you have disabled automatic rating prompts, or if your app doesn't use any modal view controllers).
 
 
 Advanced properties
@@ -331,6 +331,13 @@ The example is for Mac OS, but the same principle can be applied on iOS.
 
 Release Notes
 -----------------
+
+Version 1.11.7
+
+- Updated for iOS 10 and Xcode 8
+- Fixed checkForConnectivity crash
+- Added Finnish language support
+- Lowered Carthage deployment target to 8.0
 
 Version 1.11.6
 
